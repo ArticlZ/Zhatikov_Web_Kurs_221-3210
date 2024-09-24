@@ -1,0 +1,29 @@
+{% macro photo_form(action_url, photos=None) %}
+    <form action="{{ action_url }}" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="title">Name</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{ photos.title if photos else '' }}" required >
+        </div>
+        <div class="form-group">
+            <label for="author_name">Author</label>
+            <input type="text" class="form-control" id="author_name" name="author_name" value="" required>
+        </div>
+        <div class="form-group">
+            <label for="year">Year</label>
+            <input type="text" class="form-control" id="year" name="year" value="{{ photos.year if photos else '' }}" required>
+        </div>
+        <div class="form-group">
+            <label for="location">Place</label>
+            <input type="text" class="form-control" id="location" name="location" value="{{ photos.location if photos else '' }}" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3" required>{{ photos.description if photos else '' }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="image">Image</label>
+            <input type="file" class="form-control-file" id="image" name="image" {% if not photos %}required{% endif %}>
+        </div>
+        <button type="submit" class="btn btn-primary">{{ 'Добавить' if not photos else 'Обновить' }}</button>
+    </form>
+{% endmacro %}

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% from 'photo_macros.html' import photo_form %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h1>Edit</h1>
+        {{ photo_form(url_for('edit_photo', photo_id=photo.id), photo) }}
+    </div>
+{% endblock %}

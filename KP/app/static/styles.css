@@ -1,0 +1,226 @@
+/* Фон страницы черный, текст белый */
+body {
+    font-family: "Jost", sans-serif;
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Фон header и footer черный, текст белый */
+header, footer {
+    background-color: black;
+    padding: 20px;
+    color: white;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+    text-align: center;
+    font-family: "Jost", sans-serif;
+    font-weight: 400; 
+    font-size: large;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Галерея */
+.gallery {
+    margin-top: 20px !important;
+    -webkit-column-count: 3;
+    -webkit-column-gap: 20px;
+    -moz-column-count: 3;
+    -moz-column-gap: 20px;
+    column-count: 3;
+    column-gap: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Карточки изображений */
+.card {
+    width: 100%;
+    margin-bottom: 20px;
+    overflow: hidden;
+    break-inside: avoid;
+    border-radius: 10px;
+    border-color: white;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.card-overlay {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.card-title {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 1.2em;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover .card-title {
+    opacity: 1;
+}
+
+.card:hover img {
+    transform: scale(1.1);
+}
+
+/* Ссылки */
+a {
+    color: white !important;
+    text-decoration-color: white !important;
+}
+
+a:hover {
+    color: #f0f0f0 !important;
+}
+
+/* Кнопки */
+button, .btn {
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button:hover, .btn:hover {
+    background-color: white;
+    color: black;
+}
+
+/* Навигация в header */
+.header__nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.header__link {
+    text-decoration: none;
+    color: white;
+    padding: 0 10px;
+}
+
+.header__link.active {
+    background-color: white;
+    color: black;
+    border-radius: 30px;
+    padding: 5px 10px;
+}
+
+/* Форма авторизации */
+.auth-container {
+    width: 40%; /* Устанавливает ширину формы */
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+    margin-top: 50px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    border: 1px solid white;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Страница с деталями изображения */
+.painting-detail-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background-color: black;
+}
+
+.painting-detail-container h1 {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.painting-detail-container .painting-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+.painting-detail-container p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: white;
+}
+
+.painting-detail-container .painting-description {
+    text-align: justify;
+}
+
+/* Лайки */
+.like-section {
+    display: flex;
+    align-items: center;
+}
+
+.like-btn {
+    cursor: pointer;
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.like-count {
+    font-size: 18px;
+    color: white;
+}

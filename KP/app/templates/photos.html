@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="">
+        {% if current_user.is_authenticated and current_user.role == 'admin' %}
+            <a href="{{ url_for('add_photo') }}">Add photo</a>
+        {% endif %}
+    </div>
+    <form method="GET" action="{{ url_for('photos') }}">
+        <div>
+            <label for="sort_by">Sort by:</label>
+            <select name="sort_by" id="sort_by">
+                <option value="date_added" {% if current_sort == 'date_added' %}selected{% endif %}>Date added</option>
+
+                <option value="date_written" {% if current_sort == 'date_written' %}selected{% endif %}>Year of creation</option>
+            </select>
+        </div>
+        <div>
+            <label for="storage_location">Authors:</label>
+            <select name="storage_location" id="storage_location">
+                <option value="" {% if not current_location %}selected{% endif %}>Все</option>
+                {% for location in locations %}
+                    <option value="{{ location.location }}" {% if current_location == location.location %}selected{% endif %}>{{ location.location }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit">Apply</button>
+    </form>
+    <div class="gallery">
+        {% for photo in photos %}
+            <div class="card">
+                <a href="{{ url_for('photo_detail', photo_id=photo.id) }}">
+                    <div class="card-overlay">
+                        <img src="{{ url_for('static', filename='photos/' + photo.image_uuid + '.' + photo.image_ext) }}" alt="{{ photo.title }}">
+                        <span class="card-title">{{ photo.title }}</span>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

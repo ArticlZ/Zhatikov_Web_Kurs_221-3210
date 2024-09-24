@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% from 'photo_macros.html' import photo_form %}
+
+{% block content %}
+    <div class="">
+        <h1>Add a photo</h1>
+        {{ photo_form(url_for('add_photo')) }}
+    </div>
+{% endblock %}
