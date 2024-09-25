@@ -4,11 +4,10 @@
     <div class="photo-detail-container">
         <h1>{{ photo.title }}</h1>
         <img src="{{ url_for('static', filename='photos/' + photo.image_uuid + '.' + photo.image_ext) }}" alt="Фото" class="photo-img">
-        <p><strong>Автор:</strong> {{ photo.author_name }}</p>
-        <p><strong>Год:</strong> {{ photo.year }}</p>
-        <p><strong>Место:</strong> {{ photo.location }}</p>
+        <p><strong>Author:</strong> {{ photo.author_name }}</p>
+        <p><strong>Year:</strong> {{ photo.year }}</p>
+        <p><strong>Place:</strong> {{ photo.location }}</p>
         <p class="photo-description">{{ photo.description }}</p>
-
 
         <a href="{{ url_for('photos') }}" class="btn">Gallery</a>
         {% if current_user.is_authenticated and current_user.role == 'admin' %}
@@ -17,7 +16,6 @@
                 <button type="submit" class="btn btn-danger" onclick="return confirm('Вы уверены, что хотите удалить эту картину?');">Удалить</button>
             </form>
         {% endif %}
-        
+        <a href="{{ url_for('static', filename='photos/' + photo.image_uuid + '.' + photo.image_ext) }}" class="btn" download>Скачать</a>
     </div>
-
 {% endblock %}

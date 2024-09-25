@@ -1,17 +1,19 @@
 /* Фон страницы черный, текст белый */
 body {
     font-family: "Jost", sans-serif;
-    background-color: black;
+    background-color: rgb(0, 0, 0);
     color: white;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
-/* Фон header и footer черный, текст белый */
-header, footer {
+
+header {
+    display: flex;
     background-color: black;
     padding: 20px;
     color: white;
@@ -19,10 +21,25 @@ header, footer {
     box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
     text-align: center;
     font-family: "Jost", sans-serif;
-    font-weight: 400; 
+    font-weight: 400;
     font-size: large;
 }
 
+
+
+
+footer {
+    background-color: black;
+    padding: 20px;
+    color: white;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+    text-align: center;
+    font-family: "Jost", sans-serif;
+    font-weight: 400;
+    font-size: large;
+
+}
 main {
     flex: 1;
     display: flex;
@@ -126,25 +143,48 @@ button:hover, .btn:hover {
     color: black;
 }
 
-/* Навигация в header */
-.header__nav {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    align-items: center;
+
+/* Стили выпадающего списка */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: black;
+    min-width: 160px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+    z-index: 1;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #333;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
 .header__link {
-    text-decoration: none;
     color: white;
-    padding: 0 10px;
+    text-decoration: none;
+    padding: 10px;
+    cursor: pointer;
 }
 
-.header__link.active {
-    background-color: white;
-    color: black;
-    border-radius: 30px;
-    padding: 5px 10px;
+.header__link:hover {
+    color: #f0f0f0;
 }
 
 /* Форма авторизации */

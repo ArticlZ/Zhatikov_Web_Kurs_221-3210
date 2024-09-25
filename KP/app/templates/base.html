@@ -13,24 +13,48 @@
 </head>
 <body>
     <header class="header">
-        <div class="container">
-            <a href="{{ url_for('index') }}"><h1 class="header__title">GalleryofGreats</h1></a>
-            <nav class="header__nav">
-                <a href="{{ url_for('photos') }}" class="header__link {% if request.endpoint == 'photos' %} active {% endif %}">Photo</a>
-                {% if current_user.is_authenticated %}
-                    <a href="{{ url_for('account') }}" class="header__link {% if request.endpoint == 'account' %} active {% endif %}">
-                        <span style="vertical-align: middle;">Аккаунт</span>
+            <div class="dropup">
+                <a href="{{ url_for('index') }}"><h1 class="header__title">GalleryofGreats</h1></a>
+                    <nav class="header__nav">
+                        {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('account') }}" class="header__link {% if request.endpoint == 'account' %} active {% endif %}">
+                        <span style="vertical-align: middle;">Profile</span>
                         <i class="fas fa-user" style="vertical-align: middle;"></i>
-                    </a>
-                {% else %}
-                    <a href="{{ url_for('auth') }}" class="header__link {% if request.endpoint == 'auth' or request.endpoint == 'register'%} active {% endif %}">
-                        <span style="vertical-align: middle;">Вход</span>
+                        </a>
+                        {% else %}
+                        <a href="{{ url_for('auth') }}" class="header__link {% if request.endpoint == 'auth' or request.endpoint == 'register'%} active {% endif %}">
+                        <span style="vertical-align: middle;">Sign in</span>
                         <i class="fas fa-user" style="vertical-align: middle;"></i>
-                    </a>
-                {% endif %}
+                        </a>
+                    {% endif %}
+            </div>
+<form method="GET" action="{{ url_for('photos') }}" id="filter-form">
+    <div class="dropdown">
+        <label for="sort_by" class="header__link">Sort by</label>
+        <div class="dropdown-content">
+            <select name="sort_by" id="sort_by" onchange="this.form.submit()">
+                <option value="date_added" {% if current_sort == 'date_added' %}selected{% endif %}>Date added</option>
+                <option value="date_written" {% if current_sort == 'date_written' %}selected{% endif %}>Year of creation</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <label for="author" class="header__link">Authors</label>
+        <div class="dropdown-content">
+            <select name="author" id="author" onchange="this.form.submit()">
+                <option value="" {% if not current_author %}selected{% endif %}>Все</option>
+                {% for author in authors %}
+                <option value="{{ author.id }}" {% if current_author == author.id %}selected{% endif %}>{{ author.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+</form>
+                
                 
             </nav>
-        </div>
+        
     </header>
     
 

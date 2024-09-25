@@ -68,42 +68,64 @@ def load_user(user_id):
         return User(user_id, user.login, user.role)
     return None
 
+# @app.route('/')
+# def index():
+#     return render_template('index.html')
+
 @app.route('/')
 def index():
-    return render_template('index.html')
+    # Запрос для получения фотографий
+    query = '''SELECT p.id, p.title, p.image_uuid, p.image_ext, a.name AS author_name 
+               FROM photos p LEFT JOIN authors a ON p.author_id = a.id 
+               ORDER BY p.id DESC'''
+    with db_connector.connect().cursor(named_tuple=True) as cursor:
+        cursor.execute(query)
+        photos = cursor.fetchall()
+
+    # Запрос для получения всех авторов
+    authors_query = 'SELECT id, name FROM authors'
+    with db_connector.connect().cursor(named_tuple=True) as cursor:
+        cursor.execute(authors_query)
+        authors = cursor.fetchall()
+
+    return render_template('index.html', photos=photos, authors=authors)
 
 
-@app.route('/photos')
+@app.route('/photos', methods=['GET'])
 def photos():
     sort_by = request.args.get('sort_by', 'date_added')
-    storage_location = request.args.get('storage_location', None)
+    author_id = request.args.get('author', None)  # Получаем выбранного автора
 
-    query = 'SELECT id, title, image_uuid, image_ext, location FROM photos'
-
+    query = 'SELECT id, title, image_uuid, image_ext FROM photos'
     filters = []
-    if storage_location:
-        filters.append(f"location = '{storage_location}'")
+
+    # Если выбран автор, фильтруем по автору
+    if author_id and author_id != '':
+        filters.append(f"author_id = {author_id}")
 
     if filters:
         query += ' WHERE ' + ' AND '.join(filters)
 
+    # Сортировка
     if sort_by == 'date_written':
         query += ' ORDER BY year DESC'
-    elif sort_by == 'date_added':
-        query += ' ORDER BY id DESC'
     else:
         query += ' ORDER BY id DESC'
 
     with db_connector.connect().cursor(named_tuple=True) as cursor:
         cursor.execute(query)
         photos = cursor.fetchall()
-    
-    locations_query = 'SELECT DISTINCT location FROM photos'
-    with db_connector.connect().cursor(named_tuple=True) as cursor:
-        cursor.execute(locations_query)
-        locations = cursor.fetchall()
 
-    return render_template('photos.html', photos=photos, locations=locations, current_sort=sort_by, current_location=storage_location)
+    # Получаем всех авторов для выпадающего списка
+    authors_query = 'SELECT id, name FROM authors'
+    with db_connector.connect().cursor(named_tuple=True) as cursor:
+        cursor.execute(authors_query)
+        authors = cursor.fetchall()
+
+    return render_template('photos.html', photos=photos, authors=authors, current_sort=sort_by, current_author=author_id)
+
+
+
 
 
 @app.route('/photo/<int:photo_id>')
