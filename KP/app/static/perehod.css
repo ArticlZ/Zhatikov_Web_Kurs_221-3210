@@ -1,0 +1,83 @@
+body {
+    background-color: black; /* Черный фон */
+    color: white; /* Белый цвет текста */
+    display: flex;
+    justify-content: center; /* Центрируем содержимое по горизонтали */
+    align-items: center; /* Центрируем содержимое по вертикали */
+    height: 100vh; /* Высота страницы */
+    margin: 0; /* Убираем отступы */
+    text-align: center; /* Центрируем текст */
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex; /* Используем flexbox для размещения блоков */
+    width: 100%;
+    height: 100%;
+}
+
+.left-section, .right-section {
+    width: 50%; /* Каждая секция занимает 50% ширины */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Для позиционирования текста поверх изображения */
+}
+
+.image-container {
+    position: relative;
+    width: 650px; /* Ширина изображения */
+    height: 650px; /* Высота изображения */
+    overflow: hidden; /* Обрезаем содержимое, выходящее за границы */
+    border-radius: 120px; /* Скругленные углы */
+}
+
+.image {
+    width: 100%; /* Ширина изображения */
+    height: 100%; /* Высота изображения */
+    object-fit: cover; /* Сохраняем пропорции */
+    transition: transform 0.5s ease, filter 0.5s ease; /* Анимация для увеличения и затемнения */
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Прозрачный черный фон для затемнения */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; /* Скрыто по умолчанию */
+    transition: opacity 0.5s ease; /* Плавное появление */
+    border-radius: 120px;
+}
+
+h2 {
+    font-size: 36px;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    opacity: 0; /* Изначально скрыт текст */
+    transform: scale(1.2); /* Изначально немного увеличен */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Анимация для текста */
+}
+
+.left-section:hover .image,
+.right-section:hover .image {
+    transform: scale(1.1); /* Увеличиваем изображение при наведении */
+    filter: brightness(50%); /* Затемняем изображение */
+}
+
+.left-section:hover .overlay,
+.right-section:hover .overlay {
+    opacity: 1; /* Показываем наложение */
+}
+
+.left-section:hover h2,
+.right-section:hover h2 {
+    opacity: 1; /* Показываем текст */
+    transform: scale(1); /* Уменьшаем до обычного размера */
+}

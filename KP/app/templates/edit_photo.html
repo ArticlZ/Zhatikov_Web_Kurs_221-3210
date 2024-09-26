@@ -1,9 +1,30 @@
 {% extends 'base.html' %}
-{% from 'photo_macros.html' import photo_form %}
 
 {% block content %}
-    <div class="container mt-4">
-        <h1>Edit</h1>
-        {{ photo_form(url_for('edit_photo', photo_id=photo.id), photo) }}
+    <div class="edit-photo-container">
+        <h1>Редактировать картину</h1>
+        <form action="{{ url_for('edit_photo', photo_id=photo.id) }}" method="POST">
+            <div class="form-group">
+                <label for="title">Название картины:</label>
+                <input type="text" id="title" name="title" value="{{ photo.title }}" required>
+            </div>
+            <div class="form-group">
+                <label for="author_name">Автор:</label>
+                <input type="text" id="author_name" name="author_name" value="{{ photo.author_name }}" required>
+            </div>
+            <div class="form-group">
+                <label for="year">Год создания:</label>
+                <input type="text" id="year" name="year" value="{{ photo.year }}" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Местоположение:</label>
+                <input type="text" id="location" name="location" value="{{ photo.location }}">
+            </div>
+            <div class="form-group">
+                <label for="description">Описание:</label>
+                <textarea id="description" name="description">{{ photo.description }}</textarea>
+            </div>
+            <button type="submit" class="btn">Сохранить изменения</button>
+        </form>
     </div>
 {% endblock %}

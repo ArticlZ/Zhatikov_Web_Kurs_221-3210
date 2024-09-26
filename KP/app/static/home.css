@@ -1,0 +1,72 @@
+body {
+    background-color: black; /* Черный фон */
+    color: white; /* Цвет текста белый */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Центрируем по вертикали */
+    align-items: center; /* Центрируем по горизонтали */
+    height: 100vh; /* Высота страницы */
+    margin: 0; /* Убираем отступы */
+    text-align: center; /* Центрируем текст */
+}
+
+h1 {
+    font-size: 48px; /* Размер заголовка */
+    margin: 0; /* Убираем отступы */
+}
+
+img {
+    background-color: transparent; /* Убедитесь, что фона нет */
+    width: 150px; /* Ограничение размера логотипа */
+    height: auto;
+    border: none; /* Убираем любые границы */
+    cursor: pointer; /* Курсор указателя при наведении */
+}
+
+a {
+    margin-top: 20px; /* Отступ сверху для кнопки */
+    padding: 10px 20px; /* Отступ внутри кнопки */
+    background-color: white; /* Цвет фона кнопки */
+    color: black; /* Цвет текста кнопки */
+    text-decoration: none; /* Убираем подчеркивание */
+    border-radius: 5px; /* Скругляем углы */
+    font-weight: bold; /* Жирный текст */
+}
+
+.logo {
+    background-color: rgb(0, 0, 0);
+    position: relative;
+}
+
+#flash-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100px; /* Начальный размер вспышки */
+    height: 100px;
+    background-color: white;
+    opacity: 0; /* Изначально оверлей невидим */
+    border-radius: 50%; /* Круглая форма для эффекта вспышки */
+    transform: translate(-50%, -50%) scale(0); /* Начальное положение и масштаб 0 */
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.flash-animation {
+    animation: flash 0.3s forwards ease-out; /* Уменьшено время анимации до 0.3 секунд */
+}
+
+@keyframes flash {
+    0% {
+        opacity: 0.7; /* Начальная прозрачность */
+        transform: translate(-50%, -50%) scale(0); /* Вспышка начинается с нуля */
+    }
+    70% {
+        opacity: 1; /* Полная видимость в середине анимации */
+        transform: translate(-50%, -50%) scale(10); /* Увеличиваем вспышку */
+    }
+    100% {
+        opacity: 1; /* Оверлей остается видимым */
+        transform: translate(-50%, -50%) scale(50); /* Масштаб увеличен до размера всей страницы */
+    }
+}

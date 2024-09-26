@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='perehod.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <div class="image-container">
+                <!-- Оборачиваем изображение с подписью Photos в ссылку -->
+                <a href="{{ url_for('photos') }}">
+                    <img src="{{ url_for('static', filename='picture/Audre.jpg') }}" alt="Photo" class="image">
+                    <div class="overlay">
+                        <h2>Photos</h2>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="image-container">
+                <!-- Оставляем авторов без изменения -->
+                <img src="{{ url_for('static', filename='picture/Terry.png') }}" alt="Author" class="image">
+                <div class="overlay">
+                    <h2>Authors</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
